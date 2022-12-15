@@ -137,5 +137,12 @@ namespace TARge21Shop.Controllers
 
             return RedirectToAction(nameof(Index), vm);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var spaceshipId = await _spaceshipsServices.Delete(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
