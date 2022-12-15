@@ -1,4 +1,6 @@
-﻿namespace TARge21Shop.Core.Domain.Spaceship
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace TARge21Shop.Core.Domain.Spaceship
 {
     public class Spaceship
     {

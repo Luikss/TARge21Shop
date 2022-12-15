@@ -1,3 +1,8 @@
+using Microsoft.EntityFrameworkCore;
+using TARge21Shop.ApplicationServices.Services;
+using TARge21Shop.Core.ServiceInterface;
+using TARge21Shop.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

@@ -1,4 +1,10 @@
-﻿namespace TARge21Shop.ApplicationServices.Services
+﻿using Microsoft.EntityFrameworkCore;
+using TARge21Shop.Core.Domain.Spaceship;
+using TARge21Shop.Core.Dto;
+using TARge21Shop.Core.ServiceInterface;
+using TARge21Shop.Data;
+
+namespace TARge21Shop.ApplicationServices.Services
 {
     public class SpaceshipsServices : ISpaceshipsServices
     {
@@ -70,6 +76,17 @@
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             return result;
+        }
+
+        public async Task<Spaceship> Delete(Guid id)
+        {
+            var spaceshipId = await _context.Spaceships
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            _context.Spaceships.Remove(spaceshipId);
+            await _context.SaveChangesAsync();
+            
+            return spaceshipId;
         }
     }
 }
