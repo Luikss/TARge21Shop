@@ -79,7 +79,7 @@ namespace TARge21Shop.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(Guid id)
         {
-            var spaceship = await _spaceshipsServices.Update(id);
+            var spaceship = await _spaceshipsServices.GetAsync(id);
 
             if (spaceship == null)
             {

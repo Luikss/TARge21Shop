@@ -70,14 +70,6 @@ namespace TARge21Shop.ApplicationServices.Services
             return domain;
         }
 
-        public async Task<Spaceship> Update(Guid id)
-        {
-            var result = await _context.Spaceships
-                .FirstOrDefaultAsync(x => x.Id == id);
-
-            return result;
-        }
-
         public async Task<Spaceship> Delete(Guid id)
         {
             var spaceshipId = await _context.Spaceships
