@@ -66,7 +66,7 @@ namespace TARge21Shop.Controllers
                 ModifiedAt = vm.ModifiedAt
             };
 
-            var result = await _spaceshipsServices.Add(dto);
+            var result = await _spaceshipsServices.Create(dto);
 
             if (result == null)
             {
@@ -79,7 +79,7 @@ namespace TARge21Shop.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(Guid id)
         {
-            var spaceship = await _spaceshipsServices.GetUpdate(id);
+            var spaceship = await _spaceshipsServices.Update(id);
 
             if (spaceship == null)
             {
@@ -104,7 +104,7 @@ namespace TARge21Shop.Controllers
                 ModifiedAt = spaceship.ModifiedAt
             };
 
-            return View(vm);
+            return View("CreateUpdate", vm);
         }
 
         [HttpPost]
