@@ -1,4 +1,4 @@
-﻿@model TARge21Shop.Models.Spaceship.SpaceshipEditViewModel
+﻿@model TARge21Shop.Models.Spaceship.SpaceshipCreateUpdateViewModel
 
 @if (Model.Id.HasValue)
 {
@@ -6,7 +6,7 @@
 }
 else
 {
-    <h1>Add</h1>
+    <h1>Create</h1>
 }
 
 <div>
@@ -95,11 +95,11 @@ else
 
         @if (Model.Id.HasValue)
         {
-            <input asp-action="Update" asp-controller="spaceships" type="submit" class=" btn btn-primary" value="Update" />
+            <input asp-action="update" asp-controller="spaceships" type="submit" class=" btn btn-primary" value="Update" />
         }
         else
         {
-            <input asp-action="add" asp-controller="spaceships" type="submit" class=" btn btn-primary" value="Add" />
+            <input asp-action="create" asp-controller="spaceships" type="submit" class=" btn btn-primary" value="Create" />
         }
 
         <a asp-action="index" class="btn btn-primary">Back</a>
