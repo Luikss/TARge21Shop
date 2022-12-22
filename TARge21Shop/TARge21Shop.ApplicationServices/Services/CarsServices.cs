@@ -46,7 +46,7 @@ namespace TARge21Shop.ApplicationServices.Services
         {
             var domain = new Car()
             {
-                Id = Guid.NewGuid(),
+                Id = dto.Id,
                 Brand = dto.Brand,
                 Type = dto.Type,
                 Model = dto.Model,
