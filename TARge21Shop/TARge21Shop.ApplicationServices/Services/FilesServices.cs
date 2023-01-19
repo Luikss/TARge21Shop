@@ -10,7 +10,7 @@ namespace TARge21Shop.ApplicationServices.Services
     {
         private readonly TARge21ShopContext _context;
 
-        public FilesServices (TARge21ShopContext context)
+        public FilesServices(TARge21ShopContext context)
         {
             _context = context;
         }
@@ -33,7 +33,7 @@ namespace TARge21Shop.ApplicationServices.Services
                         photo.CopyTo(target);
                         files.ImageData = target.ToArray();
 
-                        _context.FileToDatabase.Add(files);
+                        _context.FileToDatabases.Add(files);
                     }
                 }
             }
@@ -41,11 +41,11 @@ namespace TARge21Shop.ApplicationServices.Services
 
         public async Task<FileToDatabase> RemoveImage(FileToDatabaseDto dto)
         {
-            var image = await _context.FileToDatabase
+            var image = await _context.FileToDatabases
                 .Where(x => x.Id == dto.Id)
                 .FirstOrDefaultAsync();
 
-            _context.FileToDatabase.Remove(image);
+            _context.FileToDatabases.Remove(image);
             await _context.SaveChangesAsync();
 
             return image;

@@ -12,7 +12,7 @@ using TARge21Shop.Data;
 namespace TARge21Shop.Data.Migrations
 {
     [DbContext(typeof(TARge21ShopContext))]
-    [Migration("20230112065705_FileToDatabase")]
+    [Migration("20230112065804_FileToDatabase")]
     partial class FileToDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,7 +43,7 @@ namespace TARge21Shop.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FileToDatabase");
+                    b.ToTable("FileToDatabases");
                 });
 
             modelBuilder.Entity("TARge21Shop.Core.Domain.Spaceship", b =>

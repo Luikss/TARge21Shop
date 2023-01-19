@@ -10,7 +10,7 @@ namespace TARge21Shop.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "FileToDatabase",
+                name: "FileToDatabases",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -20,14 +20,14 @@ namespace TARge21Shop.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FileToDatabase", x => x.Id);
+                    table.PrimaryKey("PK_FileToDatabases", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "FileToDatabase");
+                name: "FileToDatabases");
         }
     }
 }

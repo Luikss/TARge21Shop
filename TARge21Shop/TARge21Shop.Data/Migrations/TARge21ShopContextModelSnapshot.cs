@@ -41,7 +41,7 @@ namespace TARge21Shop.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FileToDatabase");
+                    b.ToTable("FileToDatabases");
                 });
 
             modelBuilder.Entity("TARge21Shop.Core.Domain.Spaceship", b =>

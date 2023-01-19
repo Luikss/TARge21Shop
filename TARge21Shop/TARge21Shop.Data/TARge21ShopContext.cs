@@ -9,6 +9,6 @@ namespace TARge21Shop.Data
         : base(options) { }
 
         public DbSet<Spaceship> Spaceships { get; set; }
-        public DbSet<FileToDatabase> FileToDatabase { get; set; }
+        public DbSet<FileToDatabase> FileToDatabases { get; set; }
     }
 }
