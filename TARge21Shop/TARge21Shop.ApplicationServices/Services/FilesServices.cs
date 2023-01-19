@@ -1,4 +1,5 @@
-﻿using TARge21Shop.Core.Domain;
+﻿using Microsoft.EntityFrameworkCore;
+using TARge21Shop.Core.Domain;
 using TARge21Shop.Core.Dto;
 using TARge21Shop.Core.ServiceInterface;
 using TARge21Shop.Data;
@@ -36,6 +37,18 @@ namespace TARge21Shop.ApplicationServices.Services
                     }
                 }
             }
+        }
+
+        public async Task<FileToDatabase> RemoveImage(FileToDatabaseDto dto)
+        {
+            var image = await _context.FileToDatabase
+                .Where(x => x.Id == dto.Id)
+                .FirstOrDefaultAsync();
+
+            _context.FileToDatabase.Remove(image);
+            await _context.SaveChangesAsync();
+
+            return image;
         }
     }
 }
