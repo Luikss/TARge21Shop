@@ -266,6 +266,7 @@ namespace TARge21Shop.Controllers
             var image = await _filesServices.RemoveImage(dto);
 
             return RedirectToAction(nameof(Index));
+            // return View("CreateUpdate", new { id = file.SpaceshipId });
         }
     }
 }

@@ -82,13 +82,17 @@ namespace TARge21Shop.ApplicationServices.Services
 
         public async Task<Spaceship> Delete(Guid id)
         {
-            var spaceshipId = await _context.Spaceships
+            var spaceship = await _context.Spaceships
                 .FirstOrDefaultAsync(x => x.Id == id);
+            var images = await _context.FileToDatabases
+                .Where(x => x.SpaceshipId == id)
+                .ToArrayAsync();
 
-            _context.Spaceships.Remove(spaceshipId);
+            await _files.RemoveImagesFromDatabase(images);
+            _context.Spaceships.Remove(spaceship);
             await _context.SaveChangesAsync();
             
-            return spaceshipId;
+            return spaceship;
         }
 
         public async Task<Spaceship> GetAsync(Guid id)
