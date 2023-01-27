@@ -9,23 +9,18 @@ namespace TARge21Shop.ApplicationServices.Services
     public class RealEstatesServices : IRealEstatesServices
     {
         private readonly TARge21ShopContext _context;
+        private readonly IFilesServices _files;
 
-        public RealEstatesServices(TARge21ShopContext context)
+        public RealEstatesServices(TARge21ShopContext context, IFilesServices files)
         {
             _context = context;
-        }
-
-        public async Task<RealEstate> GetAsync(Guid id)
-        {
-            var result = await _context.RealEstates
-                .FirstOrDefaultAsync(x => x.Id == id);
-
-            return result;
+            _files = files;
         }
 
         public async Task<RealEstate> Create(RealEstateDto dto)
         {
             RealEstate realEstate = new RealEstate();
+            FileToDatabase file = new FileToDatabase();
 
             realEstate.Id = Guid.NewGuid();
             realEstate.Address = dto.Address;
@@ -42,10 +37,69 @@ namespace TARge21Shop.ApplicationServices.Services
             realEstate.ModifiedAt = DateTime.Now;
             realEstate.CreatedAt = DateTime.Now;
 
+            if (dto.Files != null)
+            {
+                _files.UploadFilesToDatabase(dto, realEstate);
+            }
+
             await _context.RealEstates.AddAsync(realEstate);
             await _context.SaveChangesAsync();
 
             return realEstate;
+        }
+
+        public async Task<RealEstate> Update(RealEstateDto dto)
+        {
+            var domain = new RealEstate()
+            {
+                Id = dto.Id,
+                Address = dto.Address,
+                City = dto.City,
+                Region = dto.Region,
+                PostalCode = dto.PostalCode,
+                Country = dto.Country,
+                Phone = dto.Phone,
+                Fax = dto.Fax,
+                Size = dto.Size,
+                Floor = dto.Floor,
+                Price = dto.Price,
+                RoomCount = dto.RoomCount,
+                CreatedAt = dto.CreatedAt,
+                ModifiedAt = DateTime.Now,
+            };
+
+            if (dto.Files != null)
+            {
+                _files.UploadFilesToDatabase(dto, domain);
+            }
+
+            _context.RealEstates.Update(domain);
+            await _context.SaveChangesAsync();
+
+            return domain;
+        }
+
+        public async Task<RealEstate> Delete(Guid id)
+        {
+            var realEstate = await _context.RealEstates
+                .FirstOrDefaultAsync(x => x.Id == id);
+            var images = await _context.FileToDatabases
+                .Where(x => x.RealEstateId == id)
+                .ToArrayAsync();
+
+            await _files.RemoveImagesFromDatabase(images);
+            _context.RealEstates.Remove(realEstate);
+            await _context.SaveChangesAsync();
+
+            return realEstate;
+        }
+
+        public async Task<RealEstate> GetAsync(Guid id)
+        {
+            var result = await _context.RealEstates
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            return result;
         }
     }
 }

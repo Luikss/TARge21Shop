@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using TARge21Shop.Models.Spaceship;
 
-namespace TARge21Shop.Core.Dto
+namespace TARge21Shop.Models.RealEstate
 {
-    public class RealEstateDto
+    public class RealEstateDeleteViewModel
     {
         public Guid? Id { get; set; }
         public string Address { get; set; }
@@ -16,8 +16,7 @@ namespace TARge21Shop.Core.Dto
         public int Floor { get; set; }
         public int Price { get; set; }
         public int RoomCount { get; set; }
-        public List<IFormFile> Files { get; set; }
-        public IEnumerable<FileToDatabaseDto> Image { get; set; } = new List<FileToDatabaseDto>();
+        public List<ImageViewModel> Image { get; set; } = new List<ImageViewModel>();
 
         // only in database
         public DateTime CreatedAt { get; set; }
