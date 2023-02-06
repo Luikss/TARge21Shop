@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TARge21Shop.Core.Domain;
-using TARge21Shop.Core.Domain.Car;
 
 namespace TARge21Shop.Data
 {

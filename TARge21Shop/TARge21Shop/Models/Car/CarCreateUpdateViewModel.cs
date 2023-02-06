@@ -1,10 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using TARge21Shop.Models.Image;
 
-namespace TARge21Shop.Core.Domain.Car
+namespace TARge21Shop.Models.Car
 {
-    public class Car
+    public class CarCreateUpdateViewModel
     {
-        [Key]
         public Guid? Id { get; set; }
         public string Brand { get; set; }
         public string Type { get; set; }
@@ -19,5 +18,7 @@ namespace TARge21Shop.Core.Domain.Car
         // only in database
         public DateTime CreatedAt { get; set; }
         public DateTime ModifiedAt { get; set; }
+        public List<IFormFile> Files { get; set; }
+        public List<ImageViewModel> Image { get; set; } = new List<ImageViewModel>();
     }
 }

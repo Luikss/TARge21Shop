@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using TARge21Shop.Core.Dto;
 using TARge21Shop.Core.ServiceInterface;
 using TARge21Shop.Data;
+using TARge21Shop.Models.Image;
 using TARge21Shop.Models.Spaceship;
 
 namespace TARge21Shop.Controllers
@@ -266,7 +267,6 @@ namespace TARge21Shop.Controllers
             var image = await _filesServices.RemoveImage(dto);
 
             return RedirectToAction(nameof(Index));
-            // return View("CreateUpdate", new { id = file.SpaceshipId });
         }
     }
 }

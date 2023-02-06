@@ -1,4 +1,6 @@
-﻿namespace TARge21Shop.Models.Spaceship
+﻿using TARge21Shop.Models.Image;
+
+namespace TARge21Shop.Models.Spaceship
 {
     public class SpaceshipCreateUpdateViewModel
     {

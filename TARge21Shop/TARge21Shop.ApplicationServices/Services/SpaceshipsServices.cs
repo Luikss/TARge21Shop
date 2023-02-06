@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Xml.Linq;
 using TARge21Shop.Core.Domain;
 using TARge21Shop.Core.Dto;
 using TARge21Shop.Core.ServiceInterface;

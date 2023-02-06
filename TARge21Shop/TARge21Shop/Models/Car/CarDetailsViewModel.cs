@@ -1,4 +1,6 @@
-﻿namespace TARge21Shop.Models.Car
+﻿using TARge21Shop.Models.Image;
+
+namespace TARge21Shop.Models.Car
 {
     public class CarDetailsViewModel
     {
@@ -12,6 +14,7 @@
         public int Weight { get; set; }
         public DateTime BuiltDate { get; set; }
         public DateTime LastMaintenance { get; set; }
+        public List<ImageViewModel> Image { get; set; } = new List<ImageViewModel>();
 
         // only in database
         public DateTime CreatedAt { get; set; }

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using TARge21Shop.Core.Domain;
 
 namespace TARge21Shop.Core.Dto
 {

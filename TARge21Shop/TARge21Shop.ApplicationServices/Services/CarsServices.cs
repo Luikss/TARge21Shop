@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TARge21Shop.Core.Domain.Car;
+using TARge21Shop.Core.Domain;
 using TARge21Shop.Core.Dto;
 using TARge21Shop.Core.ServiceInterface;
 using TARge21Shop.Data;
@@ -9,37 +9,41 @@ namespace TARge21Shop.ApplicationServices.Services
     public class CarsServices : ICarServices
     {
         private readonly TARge21ShopContext _context;
+        private readonly IFilesServices _files;
 
-        public CarsServices
-            (
-                TARge21ShopContext context
-            )
+        public CarsServices(TARge21ShopContext context, IFilesServices files)
         {
             _context = context;
+            _files = files;
         }
 
-        public async Task<Car> Add(CarDto dto)
+        public async Task<Car> Create(CarDto dto)
         {
-            var domain = new Car()
-            {
-                Id = Guid.NewGuid(),
-                Brand = dto.Brand,
-                Type = dto.Type,
-                Model = dto.Model,
-                Color = dto.Color,
-                Price = dto.Price,
-                HorsePower = dto.HorsePower,
-                Weight = dto.Weight,
-                BuiltDate = dto.BuiltDate,
-                LastMaintenance = dto.LastMaintenance,
-                CreatedAt = DateTime.Now,
-                ModifiedAt = DateTime.Now,
-            };
+            Car car = new Car();
+            FileToDatabase file = new FileToDatabase();
 
-            await _context.Cars.AddAsync(domain);
+            car.Id = Guid.NewGuid();
+            car.Brand = dto.Brand;
+            car.Type = dto.Type;
+            car.Model = dto.Model;
+            car.Color = dto.Color;
+            car.Price = dto.Price;
+            car.HorsePower = dto.HorsePower;
+            car.Weight = dto.Weight;
+            car.BuiltDate = dto.BuiltDate;
+            car.LastMaintenance = dto.LastMaintenance;
+            car.CreatedAt = DateTime.Now;
+            car.ModifiedAt = DateTime.Now;
+
+            if (dto.Files != null)
+            {
+                _files.UploadFilesToDatabase(dto, car);
+            }
+
+            await _context.Cars.AddAsync(car);
             await _context.SaveChangesAsync();
 
-            return domain;
+            return car;
         }
 
         public async Task<Car> Update(CarDto dto)
@@ -60,29 +64,30 @@ namespace TARge21Shop.ApplicationServices.Services
                 ModifiedAt = DateTime.Now,
             };
 
+            if (dto.Files != null)
+            {
+                _files.UploadFilesToDatabase(dto, domain);
+            }
+
             _context.Cars.Update(domain);
             await _context.SaveChangesAsync();
 
             return domain;
         }
 
-        public async Task<Car> GetUpdate(Guid id)
-        {
-            var result = await _context.Cars
-                .FirstOrDefaultAsync(x => x.Id == id);
-
-            return result;
-        }
-
         public async Task<Car> Delete(Guid id)
         {
-            var carId = await _context.Cars
+            var car = await _context.Cars
                 .FirstOrDefaultAsync(x => x.Id == id);
+            var images = await _context.FileToDatabases
+                .Where(x => x.CarId == id)
+                .ToArrayAsync();
 
-            _context.Cars.Remove(carId);
+            await _files.RemoveImagesFromDatabase(images);
+            _context.Cars.Remove(car);
             await _context.SaveChangesAsync();
 
-            return carId;
+            return car;
         }
 
         public async Task<Car> GetAsync(Guid id)
