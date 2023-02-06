@@ -1,6 +1,4 @@
-﻿using TARge21Shop.Models.Spaceship;
-
-namespace TARge21Shop.Models.RealEstate
+﻿namespace TARge21Shop.Models.RealEstate
 {
     public class RealEstateCreateUpdateViewModel
     {
@@ -20,7 +18,5 @@ namespace TARge21Shop.Models.RealEstate
         // only in database
         public DateTime CreatedAt { get; set; }
         public DateTime ModifiedAt { get; set; }
-        public List<IFormFile> Files { get; set; }
-        public List<ImageViewModel> Image { get; set; } = new List<ImageViewModel>();
     }
 }

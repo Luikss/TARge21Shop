@@ -1,6 +1,4 @@
-﻿using TARge21Shop.Models.Spaceship;
-
-namespace TARge21Shop.Models.RealEstate
+﻿namespace TARge21Shop.Models.RealEstate
 {
     public class RealEstateDeleteViewModel
     {
@@ -16,7 +14,6 @@ namespace TARge21Shop.Models.RealEstate
         public int Floor { get; set; }
         public int Price { get; set; }
         public int RoomCount { get; set; }
-        public List<ImageViewModel> Image { get; set; } = new List<ImageViewModel>();
 
         // only in database
         public DateTime CreatedAt { get; set; }

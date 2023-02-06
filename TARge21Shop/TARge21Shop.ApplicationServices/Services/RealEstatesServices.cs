@@ -9,18 +9,15 @@ namespace TARge21Shop.ApplicationServices.Services
     public class RealEstatesServices : IRealEstatesServices
     {
         private readonly TARge21ShopContext _context;
-        private readonly IFilesServices _files;
 
-        public RealEstatesServices(TARge21ShopContext context, IFilesServices files)
+        public RealEstatesServices(TARge21ShopContext context)
         {
             _context = context;
-            _files = files;
         }
 
         public async Task<RealEstate> Create(RealEstateDto dto)
         {
             RealEstate realEstate = new RealEstate();
-            FileToDatabase file = new FileToDatabase();
 
             realEstate.Id = Guid.NewGuid();
             realEstate.Address = dto.Address;
@@ -36,11 +33,6 @@ namespace TARge21Shop.ApplicationServices.Services
             realEstate.RoomCount = dto.RoomCount;
             realEstate.ModifiedAt = DateTime.Now;
             realEstate.CreatedAt = DateTime.Now;
-
-            if (dto.Files != null)
-            {
-                _files.UploadFilesToDatabase(dto, realEstate);
-            }
 
             await _context.RealEstates.AddAsync(realEstate);
             await _context.SaveChangesAsync();
@@ -68,11 +60,6 @@ namespace TARge21Shop.ApplicationServices.Services
                 ModifiedAt = DateTime.Now,
             };
 
-            if (dto.Files != null)
-            {
-                _files.UploadFilesToDatabase(dto, domain);
-            }
-
             _context.RealEstates.Update(domain);
             await _context.SaveChangesAsync();
 
@@ -83,11 +70,7 @@ namespace TARge21Shop.ApplicationServices.Services
         {
             var realEstate = await _context.RealEstates
                 .FirstOrDefaultAsync(x => x.Id == id);
-            var images = await _context.FileToDatabases
-                .Where(x => x.RealEstateId == id)
-                .ToArrayAsync();
 
-            await _files.RemoveImagesFromDatabase(images);
             _context.RealEstates.Remove(realEstate);
             await _context.SaveChangesAsync();
 

@@ -36,9 +36,6 @@ namespace TARge21Shop.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("RealEstateId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid?>("SpaceshipId")
                         .HasColumnType("uniqueidentifier");
 
