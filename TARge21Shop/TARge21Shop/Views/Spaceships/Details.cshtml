@@ -3,7 +3,7 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Spaceships</h4>
+    <h4>Spaceship</h4>
     <hr />
 
     <dl class="row">
@@ -78,5 +78,12 @@
         </div>
     </dl>
 </div>
+
+<hr />
+@foreach (var images in Model.Image)
+{
+    <partial name="_Images" model="images" />
+}
+<hr />
 
 <a asp-action="index" class="btn btn-primary">Back</a>

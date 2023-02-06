@@ -1,10 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace TARge21Shop.Core.Domain.Spaceship
+﻿namespace TARge21Shop.Models.Spaceship
 {
-    public class Spaceship
+    public class SpaceshipCreateUpdateViewModel
     {
-        [Key]
         public Guid? Id { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
@@ -21,5 +18,7 @@ namespace TARge21Shop.Core.Domain.Spaceship
         // only in database
         public DateTime CreatedAt { get; set; }
         public DateTime ModifiedAt { get; set; }
+        public List<IFormFile> Files { get; set; }
+        public List<ImageViewModel> Image { get; set; } = new List<ImageViewModel>();
     }
 }

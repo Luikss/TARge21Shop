@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TARge21Shop.Data;
 
@@ -11,9 +12,10 @@ using TARge21Shop.Data;
 namespace TARge21Shop.Data.Migrations
 {
     [DbContext(typeof(TARge21ShopContext))]
-    partial class TARge21ShopContextModelSnapshot : ModelSnapshot
+    [Migration("20230126093419_RealEstate")]
+    partial class RealEstate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -99,54 +101,6 @@ namespace TARge21Shop.Data.Migrations
 
                     b.ToTable("RealEstates");
                 });
-
-            modelBuilder.Entity("TARge21Shop.Core.Domain.Car.Car", b =>
-            {
-                b.Property<Guid?>("Id")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnType("uniqueidentifier");
-
-                b.Property<string>("Brand")
-                    .IsRequired()
-                    .HasColumnType("nvarchar(max)");
-
-                b.Property<DateTime>("BuiltDate")
-                    .HasColumnType("datetime2");
-
-                b.Property<string>("Color")
-                    .IsRequired()
-                    .HasColumnType("nvarchar(max)");
-
-                b.Property<DateTime>("CreatedAt")
-                    .HasColumnType("datetime2");
-
-                b.Property<int>("HorsePower")
-                    .HasColumnType("int");
-
-                b.Property<DateTime>("LastMaintenance")
-                    .HasColumnType("datetime2");
-
-                b.Property<string>("Model")
-                    .IsRequired()
-                    .HasColumnType("nvarchar(max)");
-
-                b.Property<DateTime>("ModifiedAt")
-                    .HasColumnType("datetime2");
-
-                b.Property<int>("Price")
-                    .HasColumnType("int");
-
-                b.Property<string>("Type")
-                    .IsRequired()
-                    .HasColumnType("nvarchar(max)");
-
-                b.Property<int>("Weight")
-                    .HasColumnType("int");
-
-                b.HasKey("Id");
-
-                b.ToTable("Cars");
-            });
 
             modelBuilder.Entity("TARge21Shop.Core.Domain.Spaceship", b =>
                 {

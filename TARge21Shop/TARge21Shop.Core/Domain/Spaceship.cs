@@ -1,7 +1,10 @@
-﻿namespace TARge21Shop.Models.Spaceship
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace TARge21Shop.Core.Domain
 {
-    public class SpaceshipEditViewModel
+    public class Spaceship
     {
+        [Key]
         public Guid? Id { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
