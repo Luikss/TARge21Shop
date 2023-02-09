@@ -14,6 +14,7 @@
         public int Floor { get; set; }
         public int Price { get; set; }
         public int RoomCount { get; set; }
+        public IEnumerable<FileToApi> FileToApis { get; set; } = new List<FileToApi>();
 
         // only in database
         public DateTime CreatedAt { get; set; }
