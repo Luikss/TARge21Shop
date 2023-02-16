@@ -54,6 +54,45 @@ namespace TARge21Shop.ApplicationServices.Services
             return image;
         }
 
+        public async Task<List<FileToApi>> RemoveImages(FileToApiDto[] dtos)
+        {
+            foreach (var dto in dtos)
+            {
+                var image = await _context.FileToApis
+                    .FirstOrDefaultAsync(x => x.ExistingFilePath == dto.ExistingFilePath);
+
+                var filepath = _webHost.WebRootPath + "\\multipleFileUpload\\" + image.ExistingFilePath;
+
+                if (File.Exists(filepath))
+                {
+                    File.Delete(filepath);
+                }
+
+                _context.FileToApis.Remove(image);
+                await _context.SaveChangesAsync();
+            }
+
+            return null;
+        }
+
+        public async Task<FileToApi> RemoveImage(FileToApiDto dto)
+        {
+            var image = await _context.FileToApis
+                    .FirstOrDefaultAsync(x => x.Id == dto.Id);
+
+            var filepath = _webHost.WebRootPath + "\\multipleFileUpload\\" + image.ExistingFilePath;
+
+            if (File.Exists(filepath))
+            {
+                File.Delete(filepath);
+            }
+
+            _context.FileToApis.Remove(image);
+            await _context.SaveChangesAsync();
+
+            return null;
+        }
+
         public async Task<List<FileToDatabase>> RemoveImagesFromDatabase(FileToDatabase[] dtos)
         {
             foreach (var dto in dtos)
