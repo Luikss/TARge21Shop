@@ -59,7 +59,7 @@ namespace TARge21Shop.ApplicationServices.Services
             realEstate.Floor = dto.Floor;
             realEstate.Price = dto.Price;
             realEstate.RoomCount = dto.RoomCount;
-            realEstate.ModifiedAt = DateTime.Now;
+            realEstate.ModifiedAt = dto.ModifiedAt;
             realEstate.CreatedAt = DateTime.Now;
 
             _filesServices.FilesToApi(dto, realEstate);
