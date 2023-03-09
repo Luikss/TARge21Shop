@@ -1,23 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TARge21Shop.Core.Dto.Weather;
 using TARge21Shop.Core.ServiceInterface;
-using TARge21Shop.Data;
 using TARge21Shop.Models.Weather;
 
 namespace TARge21Shop.Controllers
 {
     public class WeatherForecastsController : Controller
     {
-        private readonly TARge21ShopContext _context;
         private readonly IWeatherForecastsServices _weatherForecastsServices;
 
-        public WeatherForecastsController
-            (
-                TARge21ShopContext context,
-                IWeatherForecastsServices weatherForecastsServices
-            )
+        public WeatherForecastsController(IWeatherForecastsServices weatherForecastsServices)
         {
-            _context = context;
             _weatherForecastsServices = weatherForecastsServices;
         }
 
@@ -29,14 +22,14 @@ namespace TARge21Shop.Controllers
         }
 
         [HttpPost]
-        public IActionResult ShowWeather(WeatherViewModel vm)
+        public IActionResult ShowWeather()
         {
             if (ModelState.IsValid)
             {
                 return RedirectToAction("City", "WeatherForecasts");
             }
 
-            return View(vm);
+            return View();
         }
 
         [HttpGet]
@@ -49,21 +42,26 @@ namespace TARge21Shop.Controllers
 
             vm.Date = dto.Date;
             vm.EpochDate = dto.EpochDate;
+            vm.Temperature = new Models.Weather.Temperatures();
 
+            vm.Temperature.Minimum = new Models.Weather.Temperature();
             vm.Temperature.Minimum.Value = dto.MinimumValue;
             vm.Temperature.Minimum.Unit = dto.MinimumUnit;
             vm.Temperature.Minimum.UnitType = dto.MinimumUnitType;
 
+            vm.Temperature.Maximum = new Models.Weather.Temperature();
             vm.Temperature.Maximum.Value = dto.MaximumValue;
             vm.Temperature.Maximum.Unit = dto.MaximumUnit;
             vm.Temperature.Maximum.UnitType = dto.MaximumUnitType;
 
+            vm.Day = new Models.Weather.DayNightCycle();
             vm.Day.Icon = dto.DayIcon;
             vm.Day.IconPhrase = dto.DayIconPhrase;
             vm.Day.HasPrecipitation = dto.DayHasPrecipitation;
             vm.Day.PrecipitationType = dto.DayPrecipitationType;
             vm.Day.PrecipitationIntensity = dto.DayPrecipitationIntensity;
 
+            vm.Night = new Models.Weather.DayNightCycle();
             vm.Night.Icon = dto.NightIcon;
             vm.Night.IconPhrase = dto.NightIconPhrase;
             vm.Night.HasPrecipitation = dto.NightHasPrecipitation;
