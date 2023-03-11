@@ -62,5 +62,30 @@ namespace TARge21Shop.ApplicationServices.Services
 
             return dto;
         }
+
+        public async Task<OpenWeatherResultDto> OpenWeatherDetail(OpenWeatherResultDto dto)
+        {
+            var url = $"https://api.openweathermap.org/data/2.5/weather?q=Kuressaare&APPID=c67b33b70fec143216b389893cc73f3b";
+
+            using (WebClient client = new WebClient())
+            {
+                string json = client.DownloadString(url);
+                OpenWeatherDto result = new JavaScriptSerializer().Deserialize<OpenWeatherDto>(json);
+
+                dto.Timezone = result.Timezone;
+                dto.Name = result.Name;
+                dto.Lon = result.Coords.Lon;
+                dto.Lat = result.Coords.Lat;
+                dto.Temp = result.Mains.Temp;
+                dto.Feels_like = result.Mains.Feels_like;
+                dto.Pressure = result.Mains.Pressure;
+                dto.Humidity = result.Mains.Humidity;
+                dto.Main = result.Weathers[0].Main;
+                dto.Description = result.Weathers[0].Description;
+                dto.Speed = result.Winds.Speed;
+            }
+
+            return dto;
+        }
     }
 }
