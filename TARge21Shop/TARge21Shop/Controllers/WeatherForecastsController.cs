@@ -74,5 +74,28 @@ namespace TARge21Shop.Controllers
 
             return View(vm);
         }
+
+        [HttpGet]
+        public IActionResult CityWeatherDetails() 
+        { 
+            OpenWeatherResultDto dto = new OpenWeatherResultDto();
+            OpenWeatherViewModel vm = new OpenWeatherViewModel();
+
+            _weatherForecastsServices.OpenWeatherDetail(dto);
+
+            vm.Timezone = dto.Timezone;
+            vm.Name = dto.Name;
+            vm.Lon = dto.Lon;
+            vm.Lat = dto.Lat;
+            vm.Temp = dto.Temp;
+            vm.Feels_like = dto.Feels_like;
+            vm.Pressure = dto.Pressure;
+            vm.Humidity = dto.Humidity;
+            vm.Main = dto.Main;
+            vm.Description = dto.Description;
+            vm.Speed = dto.Speed;
+
+            return View(); 
+        }
     }
 }

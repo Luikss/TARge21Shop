@@ -1,6 +1,6 @@
-﻿namespace TARge21Shop.Core.Dto.Weather
+﻿namespace TARge21Shop.Models.Weather
 {
-    public class OpenWeatherResultDto
+    public class OpenWeatherViewModel
     {
         public int Timezone { get; set; }
         public string Name { get; set; }
