@@ -1,4 +1,5 @@
 ﻿using Nancy.Json;
+using Newtonsoft.Json;
 using System.Net;
 using TARge21Shop.Core.Dto.Weather;
 using TARge21Shop.Core.ServiceInterface;
@@ -70,19 +71,19 @@ namespace TARge21Shop.ApplicationServices.Services
             using (WebClient client = new WebClient())
             {
                 string json = client.DownloadString(url);
-                OpenWeatherDto result = new JavaScriptSerializer().Deserialize<OpenWeatherDto>(json);
+                var result = new JavaScriptSerializer().Deserialize<OpenWeatherDto>(json);
 
                 dto.Timezone = result.Timezone;
                 dto.Name = result.Name;
-                dto.Lon = result.Coords.Lon;
-                dto.Lat = result.Coords.Lat;
-                dto.Temp = result.Mains.Temp;
-                dto.Feels_like = result.Mains.Feels_like;
-                dto.Pressure = result.Mains.Pressure;
-                dto.Humidity = result.Mains.Humidity;
-                dto.Main = result.Weathers[0].Main;
-                dto.Description = result.Weathers[0].Description;
-                dto.Speed = result.Winds.Speed;
+                dto.Lon = result.Coord.Lon;
+                dto.Lat = result.Coord.Lat;
+                dto.Temp = Math.Round(result.Main.Temp - 272.15, 2);
+                dto.Feels_like = Math.Round(result.Main.Feels_like - 272.15, 2);
+                dto.Pressure = result.Main.Pressure;
+                dto.Humidity = result.Main.Humidity;
+                dto.Main = result.Weather[0].Main;
+                dto.Description = result.Weather[0].Description;
+                dto.Speed = result.Wind.Speed;
             }
 
             return dto;

@@ -75,27 +75,47 @@ namespace TARge21Shop.Controllers
             return View(vm);
         }
 
+        [HttpPost]
+        public IActionResult ShowWeatherDetails()
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("CityDetails", "WeatherForecasts");
+            }
+
+            return View();
+        }
+
         [HttpGet]
-        public IActionResult CityWeatherDetails() 
+        public IActionResult CityDetails() 
         { 
             OpenWeatherResultDto dto = new OpenWeatherResultDto();
             OpenWeatherViewModel vm = new OpenWeatherViewModel();
 
             _weatherForecastsServices.OpenWeatherDetail(dto);
 
+            vm.Coords = new OpenWeatherViewModel.Coord();
+            vm.Coords.Lon = dto.Lon;
+            vm.Coords.Lat = dto.Lat;
+
+            vm.Weathers = new List<OpenWeatherViewModel.Weather>();
+            vm.Weathers.Add(new OpenWeatherViewModel.Weather());
+            vm.Weathers[0].Main = dto.Main;
+            vm.Weathers[0].Description = dto.Description;
+
+            vm.Mains = new OpenWeatherViewModel.Main();
+            vm.Mains.Temp = dto.Temp;
+            vm.Mains.Feels_like = dto.Feels_like;
+            vm.Mains.Pressure = dto.Pressure;
+            vm.Mains.Humidity = dto.Humidity;
+
+            vm.Winds = new OpenWeatherViewModel.Wind();
+            vm.Winds.Speed = dto.Speed;
+
             vm.Timezone = dto.Timezone;
             vm.Name = dto.Name;
-            vm.Lon = dto.Lon;
-            vm.Lat = dto.Lat;
-            vm.Temp = dto.Temp;
-            vm.Feels_like = dto.Feels_like;
-            vm.Pressure = dto.Pressure;
-            vm.Humidity = dto.Humidity;
-            vm.Main = dto.Main;
-            vm.Description = dto.Description;
-            vm.Speed = dto.Speed;
 
-            return View(); 
+            return View(vm); 
         }
     }
 }

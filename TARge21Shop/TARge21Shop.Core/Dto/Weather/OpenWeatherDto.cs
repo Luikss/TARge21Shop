@@ -5,16 +5,16 @@ namespace TARge21Shop.Core.Dto.Weather
     public class OpenWeatherDto
     {
         [JsonPropertyName("coord")]
-        public Coord Coords { get; set; }
+        public Coords Coord { get; set; }
 
         [JsonPropertyName("weather")]
-        public List<Weather> Weathers { get; set; }
+        public List<Weathers> Weather { get; set; }
 
         [JsonPropertyName("main")]
-        public Main Mains { get; set; }
+        public Mains Main { get; set; }
 
         [JsonPropertyName("wind")]
-        public Wind Winds { get; set; }
+        public Winds Wind { get; set; }
 
         [JsonPropertyName("timezone")]
         public int Timezone { get; set; }
@@ -22,7 +22,7 @@ namespace TARge21Shop.Core.Dto.Weather
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
-        public class Coord
+        public class Coords
         {
             [JsonPropertyName("lon")]
             public double Lon { get; set; }
@@ -31,7 +31,7 @@ namespace TARge21Shop.Core.Dto.Weather
             public double Lat { get; set; }
         }
 
-        public class Main
+        public class Mains
         {
             [JsonPropertyName("temp")]
             public double Temp { get; set; }
@@ -46,7 +46,7 @@ namespace TARge21Shop.Core.Dto.Weather
             public int Humidity { get; set; }
         }
 
-        public class Weather
+        public class Weathers
         {
             [JsonPropertyName("main")]
             public string Main { get; set; }
@@ -55,7 +55,7 @@ namespace TARge21Shop.Core.Dto.Weather
             public string Description { get; set; }
         }
 
-        public class Wind
+        public class Winds
         {
             [JsonPropertyName("speed")]
             public double Speed { get; set; }
