@@ -6,6 +6,7 @@ using TARge21Shop.ApplicationServices.Services;
 using TARge21Shop.Core.ServiceInterface;
 using TARge21Shop.Data;
 using TARge21Shop.SpaceshipTest.Macros;
+using TARge21Shop.SpaceshipTest.Mock;
 
 namespace TARge21Shop.SpaceshipTest
 {
@@ -39,7 +40,7 @@ namespace TARge21Shop.SpaceshipTest
         {
             services.AddScoped<ISpaceshipsServices, SpaceshipsServices>();
             services.AddScoped<IFilesServices, FilesServices>();
-            services.AddScoped<IHostingEnvironment>();
+            services.AddScoped<IHostingEnvironment, MockIHostingEnvironment>();
 
             services.AddDbContext<TARge21ShopContext>(x =>
             {
