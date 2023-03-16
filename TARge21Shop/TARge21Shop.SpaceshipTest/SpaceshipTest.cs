@@ -8,7 +8,7 @@ namespace TARge21Shop.SpaceshipTest
     public class SpaceshipTest : TestBase
     {
         [Fact]
-        public async Task ShouldNot_AddEmptySpaceship_WhenReturnResult()
+        public async Task Should_AddSpaceship_WhenDtoValid()
         {
             SpaceshipDto spaceship = CreateSpaceshipDto();
             var result = await Svc<ISpaceshipsServices>().Create(spaceship);
@@ -16,13 +16,13 @@ namespace TARge21Shop.SpaceshipTest
         }
 
         [Fact]
-        public async Task ShouldNot_GetByIdSpaceship_WhenReturnsNotEqual()
+        public async Task ShouldNot_GetSpaceshipById_WhenSpaceshipNotFound()
         {
             Assert.Null(await Svc<ISpaceshipsServices>().GetAsync(Guid.NewGuid()));
         }
 
         [Fact]
-        public async Task Should_GetByIdSpaceship_WhenReturnsEqual()
+        public async Task Should_GetSpaceshipById_WhenSpaceshipIsFound()
         {
             SpaceshipDto spaceship = CreateSpaceshipDto();
             var createdSpaceship = await Svc<ISpaceshipsServices>().Create(spaceship);
@@ -31,7 +31,7 @@ namespace TARge21Shop.SpaceshipTest
         }
 
         [Fact]
-        public async Task Should_DeleteByIdSpaceship_WhenDeleteSpaceship()
+        public async Task Should_DeleteSpaceshipById_WhenSpaceshipIsFound()
         {
             SpaceshipDto spaceship = CreateSpaceshipDto();
             var createdSpaceship = await Svc<ISpaceshipsServices>().Create(spaceship);
