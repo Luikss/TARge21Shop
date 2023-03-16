@@ -51,7 +51,7 @@ namespace TARge21Shop.SpaceshipTest
             });
         }
 
-        private void RegisterMacros(IServiceCollection services)
+        private static void RegisterMacros(IServiceCollection services)
         {
             var macroBaseType = typeof(IMacros);
             var macros = macroBaseType.Assembly.GetTypes()

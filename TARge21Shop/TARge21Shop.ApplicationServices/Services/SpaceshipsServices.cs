@@ -20,8 +20,8 @@ namespace TARge21Shop.ApplicationServices.Services
 
         public async Task<Spaceship> Create(SpaceshipDto dto)
         {
-            Spaceship spaceship = new Spaceship();
-            FileToDatabase file = new FileToDatabase();
+            Spaceship spaceship = new();
+            FileToDatabase file = new();
 
             spaceship.Id = Guid.NewGuid();
             spaceship.Name = dto.Name;

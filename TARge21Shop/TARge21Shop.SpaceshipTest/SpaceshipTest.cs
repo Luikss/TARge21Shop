@@ -10,12 +10,13 @@ namespace TARge21Shop.SpaceshipTest
         [Fact]
         public async Task ShouldNot_AddEmptySpaceship_WhenReturnResult()
         {
-            SpaceshipDto spaceship = createSpaceshipDto();
+            SpaceshipDto spaceship = CreateSpaceshipDto();
             var result = await Svc<ISpaceshipsServices>().Create(spaceship);
-            assertSpaceships(spaceship, result);
+            AssertSpaceships(spaceship, result);
         }
 
-        internal void assertSpaceships(SpaceshipDto expected, Spaceship actual)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Assertions", "xUnit2002:Do not use null check on value type", Justification = "<Pending>")]
+        internal static void AssertSpaceships(SpaceshipDto expected, Spaceship actual)
         {
             Assert.NotNull(actual.Id);
             Assert.NotNull(actual.CreatedAt);
@@ -33,20 +34,22 @@ namespace TARge21Shop.SpaceshipTest
             Assert.Equal(expected.BuiltDate, actual.BuiltDate);
         }
 
-        public static SpaceshipDto createSpaceshipDto()
+        public static SpaceshipDto CreateSpaceshipDto()
         {
-            SpaceshipDto spaceship = new SpaceshipDto();
-            spaceship.Name = "asd";
-            spaceship.Type = "asd";
-            spaceship.Crew = 123;
-            spaceship.Passengers = 123;
-            spaceship.CargoWeight = 123;
-            spaceship.FullTripsCount = 123;
-            spaceship.MaintenanceCount = 123;
-            spaceship.LastMaintenance = DateTime.Now;
-            spaceship.EnginePower = 123;
-            spaceship.MaidenLaunch = DateTime.Now;
-            spaceship.BuiltDate = DateTime.Now;
+            SpaceshipDto spaceship = new()
+            {
+                Name = "asd",
+                Type = "asd",
+                Crew = 123,
+                Passengers = 123,
+                CargoWeight = 123,
+                FullTripsCount = 123,
+                MaintenanceCount = 123,
+                LastMaintenance = DateTime.Now,
+                EnginePower = 123,
+                MaidenLaunch = DateTime.Now,
+                BuiltDate = DateTime.Now
+            };
 
             return spaceship;
         }

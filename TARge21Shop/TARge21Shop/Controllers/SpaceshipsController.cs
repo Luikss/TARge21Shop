@@ -44,7 +44,7 @@ namespace TARge21Shop.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            SpaceshipCreateUpdateViewModel spaceship = new SpaceshipCreateUpdateViewModel();
+            SpaceshipCreateUpdateViewModel spaceship = new();
 
             return View("CreateUpdate", spaceship);
         }
@@ -109,22 +109,23 @@ namespace TARge21Shop.Controllers
                     Image = string.Format("data:image/gif;base64, {0}", Convert.ToBase64String(y.ImageData))
                 }).ToArrayAsync();
 
-            var vm = new SpaceshipCreateUpdateViewModel();
-
-            vm.Id = spaceship.Id;
-            vm.Name = spaceship.Name;
-            vm.Type = spaceship.Type;
-            vm.Crew = spaceship.Crew;
-            vm.Passengers = spaceship.Passengers;
-            vm.CargoWeight = spaceship.CargoWeight;
-            vm.FullTripsCount = spaceship.FullTripsCount;
-            vm.MaintenanceCount = spaceship.MaintenanceCount;
-            vm.LastMaintenance = spaceship.LastMaintenance;
-            vm.EnginePower = spaceship.EnginePower;
-            vm.MaidenLaunch = spaceship.MaidenLaunch;
-            vm.BuiltDate = spaceship.BuiltDate;
-            vm.CreatedAt = spaceship.CreatedAt;
-            vm.ModifiedAt = spaceship.ModifiedAt;
+            var vm = new SpaceshipCreateUpdateViewModel
+            {
+                Id = spaceship.Id,
+                Name = spaceship.Name,
+                Type = spaceship.Type,
+                Crew = spaceship.Crew,
+                Passengers = spaceship.Passengers,
+                CargoWeight = spaceship.CargoWeight,
+                FullTripsCount = spaceship.FullTripsCount,
+                MaintenanceCount = spaceship.MaintenanceCount,
+                LastMaintenance = spaceship.LastMaintenance,
+                EnginePower = spaceship.EnginePower,
+                MaidenLaunch = spaceship.MaidenLaunch,
+                BuiltDate = spaceship.BuiltDate,
+                CreatedAt = spaceship.CreatedAt,
+                ModifiedAt = spaceship.ModifiedAt
+            };
             vm.Image.AddRange(photos);
 
             return View("CreateUpdate", vm);
@@ -190,21 +191,23 @@ namespace TARge21Shop.Controllers
                     Image = string.Format("data:image/gif;base64, {0}", Convert.ToBase64String(y.ImageData))
                 }).ToArrayAsync();
 
-            var vm = new SpaceshipDetailsViewModel();
-            vm.Id = spaceship.Id;
-            vm.Name = spaceship.Name;
-            vm.Type = spaceship.Type;
-            vm.Crew = spaceship.Crew;
-            vm.Passengers = spaceship.Passengers;
-            vm.CargoWeight = spaceship.CargoWeight;
-            vm.FullTripsCount = spaceship.FullTripsCount;
-            vm.MaintenanceCount = spaceship.MaintenanceCount;
-            vm.LastMaintenance = spaceship.LastMaintenance;
-            vm.EnginePower = spaceship.EnginePower;
-            vm.MaidenLaunch = spaceship.MaidenLaunch;
-            vm.BuiltDate = spaceship.BuiltDate;
-            vm.CreatedAt = spaceship.CreatedAt;
-            vm.ModifiedAt = spaceship.ModifiedAt;
+            var vm = new SpaceshipDetailsViewModel
+            {
+                Id = spaceship.Id,
+                Name = spaceship.Name,
+                Type = spaceship.Type,
+                Crew = spaceship.Crew,
+                Passengers = spaceship.Passengers,
+                CargoWeight = spaceship.CargoWeight,
+                FullTripsCount = spaceship.FullTripsCount,
+                MaintenanceCount = spaceship.MaintenanceCount,
+                LastMaintenance = spaceship.LastMaintenance,
+                EnginePower = spaceship.EnginePower,
+                MaidenLaunch = spaceship.MaidenLaunch,
+                BuiltDate = spaceship.BuiltDate,
+                CreatedAt = spaceship.CreatedAt,
+                ModifiedAt = spaceship.ModifiedAt
+            };
             vm.Image.AddRange(photos);
 
             return View(vm);
@@ -231,22 +234,23 @@ namespace TARge21Shop.Controllers
                     Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData))
                 }).ToArrayAsync();
 
-            var vm = new SpaceshipDeleteViewModel();
-
-            vm.Id = spaceship.Id;
-            vm.Name = spaceship.Name;
-            vm.Type = spaceship.Type;
-            vm.Crew = spaceship.Crew;
-            vm.Passengers = spaceship.Passengers;
-            vm.CargoWeight = spaceship.CargoWeight;
-            vm.FullTripsCount = spaceship.FullTripsCount;
-            vm.MaintenanceCount = spaceship.MaintenanceCount;
-            vm.LastMaintenance = spaceship.LastMaintenance;
-            vm.EnginePower = spaceship.EnginePower;
-            vm.MaidenLaunch = spaceship.MaidenLaunch;
-            vm.BuiltDate = spaceship.BuiltDate;
-            vm.CreatedAt = spaceship.CreatedAt;
-            vm.ModifiedAt = spaceship.ModifiedAt;
+            var vm = new SpaceshipDeleteViewModel
+            {
+                Id = spaceship.Id,
+                Name = spaceship.Name,
+                Type = spaceship.Type,
+                Crew = spaceship.Crew,
+                Passengers = spaceship.Passengers,
+                CargoWeight = spaceship.CargoWeight,
+                FullTripsCount = spaceship.FullTripsCount,
+                MaintenanceCount = spaceship.MaintenanceCount,
+                LastMaintenance = spaceship.LastMaintenance,
+                EnginePower = spaceship.EnginePower,
+                MaidenLaunch = spaceship.MaidenLaunch,
+                BuiltDate = spaceship.BuiltDate,
+                CreatedAt = spaceship.CreatedAt,
+                ModifiedAt = spaceship.ModifiedAt
+            };
             vm.Image.AddRange(photos);
 
             return View(vm);
