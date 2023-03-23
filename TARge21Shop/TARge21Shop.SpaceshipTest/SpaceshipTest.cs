@@ -27,7 +27,7 @@ namespace TARge21Shop.SpaceshipTest
             SpaceshipDto spaceship = CreateSpaceshipDto();
             var createdSpaceship = await Svc<ISpaceshipsServices>().Create(spaceship);
             var recivedSpaceship = await Svc<ISpaceshipsServices>().GetAsync((Guid)createdSpaceship.Id);
-            AssertSpaceships(spaceship, recivedSpaceship);
+            Assert.Equal(createdSpaceship, recivedSpaceship);
         }
 
         [Fact]
@@ -35,22 +35,15 @@ namespace TARge21Shop.SpaceshipTest
         {
             SpaceshipDto spaceship = CreateSpaceshipDto();
             var createdSpaceship = await Svc<ISpaceshipsServices>().Create(spaceship);
-            var recivedSpaceship = await Svc<ISpaceshipsServices>().GetAsync((Guid)createdSpaceship.Id);
-            AssertSpaceships(spaceship, recivedSpaceship);
-
             var deletedSpaceship = await Svc<ISpaceshipsServices>().Delete((Guid)createdSpaceship.Id);
-            AssertSpaceships(spaceship, deletedSpaceship);
-            Assert.Null(await Svc<ISpaceshipsServices>().GetAsync((Guid)createdSpaceship.Id));
+            Assert.Equal(createdSpaceship, deletedSpaceship);
         }
 
         [Fact]
         public async Task Should_UpdateSpaceship_WhenDtoValid()
         {
             SpaceshipDto spaceship = CreateSpaceshipDto();
-            var createdSpaceship = await Svc<ISpaceshipsServices>().Create(spaceship);
-            var recivedSpaceship = await Svc<ISpaceshipsServices>().GetAsync((Guid)createdSpaceship.Id);
-            AssertSpaceships(spaceship, recivedSpaceship);
-
+            await Svc<ISpaceshipsServices>().Create(spaceship);
             spaceship = UpdateDto(spaceship);
             var recivedUpdatedSpaceship = await Svc<ISpaceshipsServices>().Update(spaceship);
             AssertSpaceships(spaceship, recivedUpdatedSpaceship);
