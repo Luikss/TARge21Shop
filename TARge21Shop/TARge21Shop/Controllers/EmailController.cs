@@ -1,13 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using TARge21Shop.Core.Dto;
 using TARge21Shop.Core.ServiceInterface;
+using TARge21Shop.Models.Email;
 
 namespace TARge21Shop.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class EmailController : ControllerBase
+    public class EmailController : Controller
     {
         private readonly IEmailServices _emailServices;
 
@@ -16,11 +14,24 @@ namespace TARge21Shop.Controllers
             _emailServices = emailServices;
         }
 
-        [HttpPost]
-        public IActionResult SendEmail(EmailDto request)
+        [HttpGet]
+        public IActionResult Index()
         {
-            _emailServices.SendEmail(request);
-            return Ok();
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult SendEmail(EmailViewModel request)
+        {
+            var dto = new EmailDto()
+            {
+                To = request.To,
+                Subject = request.Subject,
+                Body = request.Body,
+            };
+
+            _emailServices.SendEmail(dto);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
